@@ -1,0 +1,546 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Data.SqlClient;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Cineverse
+{
+    public partial class AdminPanel : Form
+    {
+
+       
+
+        public AdminPanel()
+        {
+            InitializeComponent();
+            
+        }
+
+        private void btnUploadPoster_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp";
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                pictureBox12.Image = Image.FromFile(ofd.FileName);
+                pictureBox12.ImageLocation = ofd.FileName;
+            }
+        }
+
+        private void pbPoster_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnUploadPoster_Click_1(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void btnConfirm_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void label1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AdminPanel_Load(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void tabPage3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DTDRID1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabPage2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BTNUPLOAD_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp";
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                pictureBox6.Image = Image.FromFile(ofd.FileName); // show in AdminForm
+                pictureBox6.Tag = ofd.FileName; // temporarily store path until update
+            }
+        }
+
+        private void BTNMV1_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(NAME1.Text))
+            {
+                MessageBox.Show("Please enter a name!");
+                return;
+            }
+
+            if (pictureBox6.Tag == null)
+            {
+                MessageBox.Show("Please upload a picture!");
+                return;
+            }
+
+            string projectPath = Application.StartupPath;
+            string imagesFolder = System.IO.Path.Combine(projectPath, "img");
+
+            if (!System.IO.Directory.Exists(imagesFolder))
+                System.IO.Directory.CreateDirectory(imagesFolder);
+
+            string sourcePath = pictureBox6.Tag.ToString();
+            string fileName = System.IO.Path.GetFileName(sourcePath);
+            string destPath = System.IO.Path.Combine(imagesFolder, fileName);
+            System.IO.File.Copy(sourcePath, destPath, true);
+
+            string dataFile = System.IO.Path.Combine(projectPath, "AdminData.txt");
+            List<string> lines = new List<string>();
+
+            if (System.IO.File.Exists(dataFile))
+                lines = System.IO.File.ReadAllLines(dataFile).ToList();
+
+            while (lines.Count < 5)
+                lines.Add("|");
+
+            lines[0] = NAME1.Text + "|" + destPath;
+
+            System.IO.File.WriteAllLines(dataFile, lines);
+
+            MessageBox.Show("Movie 1 updated successfully!");
+
+
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp";
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                pictureBox2.Image = Image.FromFile(ofd.FileName); // show in AdminForm
+                pictureBox2.Tag = ofd.FileName; // temporarily store path until update
+            }
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp";
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                pictureBox4.Image = Image.FromFile(ofd.FileName); // show in AdminForm
+                pictureBox4.Tag = ofd.FileName; // temporarily store path until update
+            }
+
+        }
+
+        private void button3_Click_1(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp";
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                pictureBox3.Image = Image.FromFile(ofd.FileName); // show in AdminForm
+                pictureBox3.Tag = ofd.FileName; // temporarily store path until update
+            }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp";
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                pictureBox5.Image = Image.FromFile(ofd.FileName); // show in AdminForm
+                pictureBox5.Tag = ofd.FileName; // temporarily store path until update
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(textBox6.Text))
+            {
+                MessageBox.Show("Please enter a name!");
+                return;
+            }
+
+            if (pictureBox2.Tag == null)
+            {
+                MessageBox.Show("Please upload a picture!");
+                return;
+            }
+
+            string projectPath = Application.StartupPath;
+            string imagesFolder = System.IO.Path.Combine(projectPath, "img");
+
+            if (!System.IO.Directory.Exists(imagesFolder))
+                System.IO.Directory.CreateDirectory(imagesFolder);
+
+            string sourcePath = pictureBox2.Tag.ToString();
+            string fileName = System.IO.Path.GetFileName(sourcePath);
+            string destPath = System.IO.Path.Combine(imagesFolder, fileName);
+            System.IO.File.Copy(sourcePath, destPath, true);
+
+            string dataFile = System.IO.Path.Combine(projectPath, "AdminData.txt");
+            List<string> lines = new List<string>();
+
+            if (System.IO.File.Exists(dataFile))
+                lines = System.IO.File.ReadAllLines(dataFile).ToList();
+
+            while (lines.Count < 5)
+                lines.Add("|");
+
+            lines[1] = textBox6.Text + "|" + destPath;
+
+            System.IO.File.WriteAllLines(dataFile, lines);
+
+            MessageBox.Show("Movie 2 updated successfully!");
+
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(textBox7.Text))
+            {
+                MessageBox.Show("Please enter a name!");
+                return;
+            }
+
+            if (pictureBox4.Tag == null)
+            {
+                MessageBox.Show("Please upload a picture!");
+                return;
+            }
+
+            string projectPath = Application.StartupPath;
+            string imagesFolder = System.IO.Path.Combine(projectPath, "img");
+
+            if (!System.IO.Directory.Exists(imagesFolder))
+                System.IO.Directory.CreateDirectory(imagesFolder);
+
+            string sourcePath = pictureBox4.Tag.ToString();
+            string fileName = System.IO.Path.GetFileName(sourcePath);
+            string destPath = System.IO.Path.Combine(imagesFolder, fileName);
+            System.IO.File.Copy(sourcePath, destPath, true);
+
+            string dataFile = System.IO.Path.Combine(projectPath, "AdminData.txt");
+            List<string> lines = new List<string>();
+
+            if (System.IO.File.Exists(dataFile))
+                lines = System.IO.File.ReadAllLines(dataFile).ToList();
+
+            while (lines.Count < 5)
+                lines.Add("|");
+
+            lines[2] = textBox7.Text + "|" + destPath;
+
+            System.IO.File.WriteAllLines(dataFile, lines);
+
+            MessageBox.Show("Movie 3 updated successfully!");
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(textBox8.Text))
+            {
+                MessageBox.Show("Please enter a name!");
+                return;
+            }
+
+            if (pictureBox3.Tag == null)
+            {
+                MessageBox.Show("Please upload a picture!");
+                return;
+            }
+
+            string projectPath = Application.StartupPath;
+            string imagesFolder = System.IO.Path.Combine(projectPath, "img");
+
+            if (!System.IO.Directory.Exists(imagesFolder))
+                System.IO.Directory.CreateDirectory(imagesFolder);
+
+            string sourcePath = pictureBox3.Tag.ToString();
+            string fileName = System.IO.Path.GetFileName(sourcePath);
+            string destPath = System.IO.Path.Combine(imagesFolder, fileName);
+            System.IO.File.Copy(sourcePath, destPath, true);
+
+            string dataFile = System.IO.Path.Combine(projectPath, "AdminData.txt");
+            List<string> lines = new List<string>();
+
+            if (System.IO.File.Exists(dataFile))
+                lines = System.IO.File.ReadAllLines(dataFile).ToList();
+
+            while (lines.Count < 5)
+                lines.Add("|");
+
+            lines[3] = textBox8.Text + "|" + destPath;
+
+            System.IO.File.WriteAllLines(dataFile, lines);
+
+            MessageBox.Show("Movie 4 updated successfully!");
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(textBox9.Text))
+            {
+                MessageBox.Show("Please enter a name!");
+                return;
+            }
+
+            if (pictureBox5.Tag == null)
+            {
+                MessageBox.Show("Please upload a picture!");
+                return;
+            }
+
+            string projectPath = Application.StartupPath;
+            string imagesFolder = System.IO.Path.Combine(projectPath, "img");
+
+            if (!System.IO.Directory.Exists(imagesFolder))
+                System.IO.Directory.CreateDirectory(imagesFolder);
+
+            string sourcePath = pictureBox5.Tag.ToString();
+            string fileName = System.IO.Path.GetFileName(sourcePath);
+            string destPath = System.IO.Path.Combine(imagesFolder, fileName);
+            System.IO.File.Copy(sourcePath, destPath, true);
+
+            string dataFile = System.IO.Path.Combine(projectPath, "AdminData.txt");
+            List<string> lines = new List<string>();
+
+            if (System.IO.File.Exists(dataFile))
+                lines = System.IO.File.ReadAllLines(dataFile).ToList();
+
+            while (lines.Count < 5)
+                lines.Add("|");
+
+            lines[4] = textBox9.Text + "|" + destPath;
+
+            System.IO.File.WriteAllLines(dataFile, lines);
+
+            MessageBox.Show("Movie 5 updated successfully!");
+        }
+
+        private void Upcoming_Movies_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void guna2GradientButton1_Click(object sender, EventArgs e)
+        {
+            string name = guna2TextBox1.Text;
+            string genre = guna2ComboBox1.SelectedItem?.ToString();
+            int year = int.Parse(guna2TextBox2.Text);
+            double rating = double.Parse(guna2TextBox3.Text);
+            string posterFile = pictureBox12.ImageLocation; // or the path where you saved the poster
+            string trailerUrl = guna2TextBox4.Text;
+
+            AddUpcomingMovie(name, genre, year, rating, posterFile, trailerUrl);
+
+            MessageBox.Show("Upcoming movie added successfully!");
+        }
+
+        private void AddUpcomingMovie(string name, string genre, int year, double rating, string posterFile, string trailerUrl)
+        {
+            string connectionString = @"Server=ABRAR;Database=CINE_VERSE_DB;Trusted_Connection=True;";
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = @"INSERT INTO Upcoming_Movies (MovieName, Genre, Year, Rating, PosterFile, TrailerUrl)
+                                 VALUES (@name, @genre, @year, @rating, @posterFile, @trailerUrl)";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@name", name);
+                    cmd.Parameters.AddWithValue("@genre", genre);
+                    cmd.Parameters.AddWithValue("@year", year);
+                    cmd.Parameters.AddWithValue("@rating", rating);
+                    cmd.Parameters.AddWithValue("@posterFile", posterFile);
+                    cmd.Parameters.AddWithValue("@trailerUrl", trailerUrl);
+
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        private void guna2CircleButton1_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Video Files|*.mp4;*.avi;*.mov;*.wmv|All Files|*.*";
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                guna2TextBox4.Text = ofd.FileName;
+            }
+        }
+
+        private bool AreUpcomingFieldsFilled()
+        {
+            return !string.IsNullOrWhiteSpace(guna2TextBox1.Text) &&
+                   guna2ComboBox1.SelectedItem != null &&
+                   !string.IsNullOrWhiteSpace(guna2TextBox2.Text) &&
+                   !string.IsNullOrWhiteSpace(guna2TextBox3.Text) &&
+                   !string.IsNullOrWhiteSpace(guna2TextBox4.Text) &&
+                   !string.IsNullOrWhiteSpace(pictureBox12.ImageLocation);
+        }
+
+        private void guna2GradientButton2_Click(object sender, EventArgs e) // ADD
+        {
+            if (!AreUpcomingFieldsFilled())
+            {
+                MessageBox.Show("Please fill all fields and upload poster/trailer.");
+                return;
+            }
+            string name = guna2TextBox1.Text;
+            string genre = guna2ComboBox1.SelectedItem.ToString();
+            int year = int.Parse(guna2TextBox2.Text);
+            double rating = double.Parse(guna2TextBox3.Text);
+            string posterFile = pictureBox12.ImageLocation;
+            string trailerUrl = guna2TextBox4.Text;
+            AddUpcomingMovie(name, genre, year, rating, posterFile, trailerUrl);
+            MessageBox.Show("Upcoming movie added successfully!");
+            LoadUpcomingMoviesToGrid();
+        }
+
+        private void guna2GradientButton4_Click(object sender, EventArgs e) // EDIT
+        {
+            if (!AreUpcomingFieldsFilled())
+            {
+                MessageBox.Show("Please fill all fields and upload poster/trailer.");
+                return;
+            }
+            string name = guna2TextBox1.Text;
+            string genre = guna2ComboBox1.SelectedItem.ToString();
+            int year = int.Parse(guna2TextBox2.Text);
+            double rating = double.Parse(guna2TextBox3.Text);
+            string posterFile = pictureBox12.ImageLocation;
+            string trailerUrl = guna2TextBox4.Text;
+            string connectionString = @"Server=ABRAR;Database=CINE_VERSE_DB;Trusted_Connection=True;";
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = @"UPDATE Upcoming_Movies SET Genre=@genre, Year=@year, Rating=@rating, PosterFile=@posterFile, TrailerUrl=@trailerUrl WHERE MovieName=@name";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@name", name);
+                    cmd.Parameters.AddWithValue("@genre", genre);
+                    cmd.Parameters.AddWithValue("@year", year);
+                    cmd.Parameters.AddWithValue("@rating", rating);
+                    cmd.Parameters.AddWithValue("@posterFile", posterFile);
+                    cmd.Parameters.AddWithValue("@trailerUrl", trailerUrl);
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            MessageBox.Show("Movie updated successfully!");
+            LoadUpcomingMoviesToGrid();
+        }
+
+        private void guna2GradientButton3_Click(object sender, EventArgs e) // DEL
+        {
+            string name = guna2TextBox1.Text;
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                MessageBox.Show("Enter the movie name to delete.");
+                return;
+            }
+            string connectionString = @"Server=ABRAR;Database=CINE_VERSE_DB;Trusted_Connection=True;";
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = @"DELETE FROM Upcoming_Movies WHERE MovieName=@name";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@name", name);
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            MessageBox.Show("Movie deleted successfully!");
+            LoadUpcomingMoviesToGrid();
+        }
+
+        private void guna2GradientButton5_Click(object sender, EventArgs e) // SEARCH
+        {
+            string search = guna2TextBox1.Text.Trim();
+            string connectionString = @"Server=ABRAR;Database=CINE_VERSE_DB;Trusted_Connection=True;";
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = "SELECT * FROM Upcoming_Movies WHERE MovieName LIKE @search";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@search", "%" + search + "%");
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    dataGridView2.DataSource = dt;
+                }
+            }
+        }
+
+        private void LoadUpcomingMoviesToGrid()
+        {
+            string connectionString = @"Server=ABRAR;Database=CINE_VERSE_DB;Trusted_Connection=True;";
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = "SELECT * FROM Upcoming_Movies";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    dataGridView2.DataSource = dt;
+                }
+            }
+        }
+    }
+}
+
