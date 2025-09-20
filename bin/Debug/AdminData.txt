@@ -1,0 +1,5 @@
+AVENGERS|C:\Users\Abrar Kabir\OneDrive\Desktop\C# PROJECT\Cineverse\Cineverse\bin\Debug\img\3333.png
+MORTAL COMBAT|C:\Users\Abrar Kabir\OneDrive\Desktop\C# PROJECT\Cineverse\Cineverse\bin\Debug\img\movie poster 3.jpg
+TRON 3|C:\Users\Abrar Kabir\OneDrive\Desktop\C# PROJECT\Cineverse\Cineverse\bin\Debug\img\wp15288353-tron-ares-movie-poster-wallpapers.jpg
+BATMAN|C:\Users\Abrar Kabir\OneDrive\Desktop\C# PROJECT\Cineverse\Cineverse\bin\Debug\img\1381816-1440x2960-iphone-hd-movie-poster-background-photo.jpg
+ALIEN|C:\Users\Abrar Kabir\OneDrive\Desktop\C# PROJECT\Cineverse\Cineverse\bin\Debug\img\1381579-1605x2182-samsung-hd-movie-poster-wallpaper.jpg
